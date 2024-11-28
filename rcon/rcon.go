@@ -11,7 +11,7 @@ import (
 )
 
 const (
-	RespAuthFailed = -1 //授权失败
+	RespAuthFailed = -1 //认证失败
 )
 
 type Rcon interface {
@@ -59,7 +59,7 @@ func (s *rconEntity) Auth(password string) (err error) {
 // ExecCommand 执行命令
 func (s *rconEntity) ExecCommand(command string) (data string, err error) {
 	if s.isAuthed == false {
-		err = errors.New("未授权")
+		err = errors.New("未认证")
 		return
 	}
 	//发送命令
@@ -91,8 +91,8 @@ func (s *rconEntity) isAuthSuccess(packet *Packet) (err error) {
 		err = errors.New(fmt.Sprintf("不匹配的type类型,type:%d", packet.Type))
 		return
 	}
-	if packet.ID == RespAuthFailed { //授权失败，密码校验失败
-		err = errors.New(fmt.Sprintf("授权失败"))
+	if packet.ID == RespAuthFailed { //认证失败，密码校验失败
+		err = errors.New(fmt.Sprintf("认证失败"))
 		return
 	}
 	if packet.ID > RespAuthFailed {
