@@ -78,6 +78,10 @@ func (s *rconEntity) ExecCommand(command string) (data string, err error) {
 	if err != nil {
 		return
 	}
+	err = s.checkID(respPacket)
+	if err != nil {
+		return
+	}
 	data = respPacket.Body()
 	return
 }
@@ -88,7 +92,7 @@ func (s *rconEntity) isAuthSuccess(packet *Packet) (err error) {
 		return
 	}
 	if packet.ID == RespAuthFailed { //授权失败，密码校验失败
-		err = errors.New(fmt.Sprintf("授权失败,id:%d", packet.ID))
+		err = errors.New(fmt.Sprintf("授权失败"))
 		return
 	}
 	if packet.ID > RespAuthFailed {
@@ -126,11 +130,6 @@ func (s *rconEntity) readPacket() (p *Packet, err error) {
 	if err != nil {
 		return
 	}
-	if p.ID != s.lastPacketID {
-		err = fmt.Errorf("packet包中ID不匹配: origin_id:%d,current_id:%d", s.lastPacketID, p.ID)
-		return
-	}
-
 	err = binary.Read(reader, binary.LittleEndian, &p.Type)
 	if err != nil {
 		return
@@ -164,9 +163,18 @@ func (s *rconEntity) encodePacket(p *Packet) (data []byte, err error) {
 	return
 }
 
-//func (s *rconEntity) getCommandEmptyPackage() *Packet {
-//	return NewPacket(DataTypeResponseValue, s.lastPacketID, "")
-//}
+//	func (s *rconEntity) getCommandEmptyPackage() *Packet {
+//		return NewPacket(DataTypeResponseValue, s.lastPacketID, "")
+//	}
+//
+// 检测请求包是否和请求包匹配
+func (s *rconEntity) checkID(p *Packet) (err error) {
+	if p.ID != s.lastPacketID {
+		err = fmt.Errorf("packet包中ID不匹配: origin_id:%d,current_id:%d", s.lastPacketID, p.ID)
+		return
+	}
+	return
+}
 
 func (s *rconEntity) Close() {
 	s.conn.Close()
