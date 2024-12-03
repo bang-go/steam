@@ -4,3 +4,4 @@
 
 [Source RCON Protocal](https://developer.valvesoftware.com/wiki/Source_RCON_Protocol)
 
+[SteamID](https://developer.valvesoftware.com/wiki/SteamID)

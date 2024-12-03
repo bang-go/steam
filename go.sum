@@ -2,3 +2,9 @@ github.com/bang-go/network v0.0.2 h1:Z8/jvzlfUn2wqUuQC9mvnZu1KCc8rWVf3h+9HvMN4/4
 github.com/bang-go/network v0.0.2/go.mod h1:UqwqBfNfPgpkhhrEyt5hXkC4/tJyl8+1DatoymnJ5Bo=
 github.com/bang-go/opt v0.0.2 h1:kuertp3O/YmrHeLHkNgHNJyNBuAHp7QUMr1gs6fNxfc=
 github.com/bang-go/opt v0.0.2/go.mod h1:KwqfP/1zbewrPjZFa6JWAf6O4fWH0YEiTrJgdOe9sLM=
+github.com/bang-go/util v0.0.5 h1:ibAB3T1iNZJZjlNNlGRPnOh28Afy4tUtQYWdzusDCLk=
+github.com/bang-go/util v0.0.5/go.mod h1:XI/0hMdPsqonirSSAPiJbXaX8mHvs9LOF+mpXTE8Hc8=
+github.com/google/uuid v1.6.0 h1:NIvaJDMOsjHA8n1jAhLSgzrAzy1Hgr+hNrb57e+94F0=
+github.com/google/uuid v1.6.0/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
+github.com/shopspring/decimal v1.4.0 h1:bxl37RwXBklmTi0C79JfXCEBD1cqqHt0bbgBAGFp81k=
+github.com/shopspring/decimal v1.4.0/go.mod h1:gawqmDU56v4yIKSwfBSFip1HdCCXN8/+DMd9qYNcwME=
