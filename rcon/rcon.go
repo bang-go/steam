@@ -17,7 +17,7 @@ const (
 type Rcon interface {
 	Dail() error
 	Auth(string) error
-	ExecCommand(string) (string, error)
+	ExecCommand([]byte) ([]byte, error)
 	Close()
 }
 type Config struct {
@@ -44,7 +44,7 @@ func (s *rconEntity) Dail() (err error) {
 
 func (s *rconEntity) Auth(password string) (err error) {
 	s.lastPacketID++
-	packet := NewPacket(DataTypeAuth, s.lastPacketID, password)
+	packet := NewPacket(DataTypeAuth, s.lastPacketID, []byte(password))
 	err = s.writePacket(packet)
 	if err != nil {
 		return
@@ -57,7 +57,7 @@ func (s *rconEntity) Auth(password string) (err error) {
 }
 
 // ExecCommand 执行命令
-func (s *rconEntity) ExecCommand(command string) (data string, err error) {
+func (s *rconEntity) ExecCommand(command []byte) (body []byte, err error) {
 	if s.isAuthed == false {
 		err = errors.New("未认证")
 		return
@@ -82,7 +82,7 @@ func (s *rconEntity) ExecCommand(command string) (data string, err error) {
 	if err != nil {
 		return
 	}
-	data = respPacket.Body()
+	body = respPacket.Body()
 	return
 }
 

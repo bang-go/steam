@@ -19,7 +19,7 @@ func TestRcon(t *testing.T) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	data, err := rc.ExecCommand("bot_add_ct")
+	data, err := rc.ExecCommand([]byte("bot_add_ct"))
 	if err != nil {
 		log.Fatal(err)
 	}

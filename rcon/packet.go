@@ -24,16 +24,16 @@ type Packet struct {
 	body []byte
 }
 
-func NewPacket(packageType PacketType, packetId int32, bodyStr string) *Packet {
-	size := len([]byte(bodyStr)) + int(MinPacketSize)
+func NewPacket(packageType PacketType, packetId int32, body []byte) *Packet {
+	size := len(body) + int(MinPacketSize)
 	return &Packet{
 		Size: int32(size),
 		Type: packageType,
 		ID:   packetId,
-		body: []byte(bodyStr),
+		body: body,
 	}
 }
 
-func (s *Packet) Body() string {
-	return string(s.body)
+func (s *Packet) Body() []byte {
+	return s.body
 }
